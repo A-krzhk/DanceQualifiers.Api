@@ -5,10 +5,6 @@ namespace DanceQualifiers.Core.ViewModels
     public class RegisterViewModel
     {
         [Required]
-        [EmailAddress]
-        public string Email { get; set; }
-
-        [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
@@ -24,5 +20,9 @@ namespace DanceQualifiers.Core.ViewModels
 
         [Required]
         public string Surname { get; set; }
+
+        [Required]
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNumber { get; set; }
     }
 }

@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using DanceQualifiers.Core.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace DanceQualifiers.Infrastructure
+public class DanceQualifiersDbContext : IdentityDbContext<AppUser>
 {
-    public class DanceQualifiersDbContext : IdentityDbContext<AppUser>
+    public DanceQualifiersDbContext(DbContextOptions<DanceQualifiersDbContext> options)
+        : base(options)
     {
-        public DanceQualifiersDbContext(DbContextOptions<DanceQualifiersDbContext> options) 
-            : base(options)
-        {
-        }
     }
 }
