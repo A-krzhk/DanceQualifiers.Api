@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DanceQualifiers.Core\DanceQualifiers.Core.csproj" />
+    <ProjectReference Include="..\DanceQualifiers.Infrastructure\DanceQualifiers.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -12,6 +12,7 @@ public class AccountController : ControllerBase
     private readonly SignInManager<AppUser> _signInManager;
     private readonly ITokenService _tokenService;
 
+
     public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService)
     {
         _userManager = userManager;
@@ -41,7 +42,7 @@ public class AccountController : ControllerBase
 
         if (result.Succeeded)
         {
-            await _userManager.AddToRoleAsync(user, "User");
+            await _userManager.AddToRoleAsync(user, "Admin");
             await _signInManager.SignInAsync(user, isPersistent: false);
 
             var token = _tokenService.GenerateJwtToken(user);

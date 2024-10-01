@@ -4,8 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 public class DanceQualifiersDbContext : IdentityDbContext<AppUser>
 {
+    public DbSet<Direction> Directions { get; set; }
+    public DbSet<TimeSlot> TimeSlots { get; set; }
+
     public DanceQualifiersDbContext(DbContextOptions<DanceQualifiersDbContext> options)
         : base(options)
     {
     }
+
 }
