@@ -48,9 +48,8 @@ public class AccountController : ControllerBase
 
             return Ok(new
             {
-                token = token,
-                userName = user.UserName,
-                email = user.Email
+                Token = token,
+                userName = user.UserName
             });
         }
 
@@ -62,5 +61,26 @@ public class AccountController : ControllerBase
         return BadRequest(ModelState);
     }
 
-    
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginViewModel model)
+    {
+        var user = await _userManager.FindByNameAsync(model.PhoneNumber);
+
+        if (user == null)
+        {
+            return Unauthorized("Invalid phone number or password");
+        }
+
+        var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
+
+        if (!result.Succeeded)
+        {
+            return Unauthorized("Invalid phone number or password");
+        }
+
+        var token = await _tokenService.GenerateJwtToken(user);
+
+        return Ok(new { Token = token });
+    }
+
 }
