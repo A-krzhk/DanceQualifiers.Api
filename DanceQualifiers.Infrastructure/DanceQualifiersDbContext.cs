@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using DanceQualifiers.Core.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace DanceQualifiers.Infrastructure
+public class DanceQualifiersDbContext : IdentityDbContext<AppUser>
 {
-    public class DanceQualifiersDbContext : IdentityDbContext<AppUser>
+    public DbSet<Direction> Directions { get; set; }
+    public DbSet<TimeSlot> TimeSlots { get; set; }
+
+    public DanceQualifiersDbContext(DbContextOptions<DanceQualifiersDbContext> options)
+        : base(options)
     {
-        public DanceQualifiersDbContext(DbContextOptions<DanceQualifiersDbContext> options) 
-            : base(options)
-        {
-        }
     }
+
 }
