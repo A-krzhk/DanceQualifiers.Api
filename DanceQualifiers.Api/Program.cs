@@ -1,13 +1,12 @@
 using DanceQualifiers.Application.Interfaces;
 using DanceQualifiers.Application.Services;
 using DanceQualifiers.Core.Models;
+using DanceQualifiers.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Reflection;
 using System.Text;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -5,5 +5,6 @@
         public TimeSpan StartTime { get; set; }
         public DateTime Date { get; set; }
         public int MaxParticipants { get; set; }
+
     }
 }
