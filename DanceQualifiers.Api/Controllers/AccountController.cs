@@ -1,6 +1,6 @@
 ﻿using DanceQualifiers.Application.Interfaces;
+using DanceQualifiers.Core.DTO;
 using DanceQualifiers.Core.Models;
-using DanceQualifiers.Core.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +21,7 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterViewModel model)
+    public async Task<IActionResult> Register(RegisterDto model)
     {
         if (!ModelState.IsValid)
         {
@@ -42,7 +42,7 @@ public class AccountController : ControllerBase
 
         if (result.Succeeded)
         {
-            await _userManager.AddToRoleAsync(user, "Admin");
+            await _userManager.AddToRoleAsync(user, "User");
             await _signInManager.SignInAsync(user, isPersistent: false);
 
             var token = _tokenService.GenerateJwtToken(user);
@@ -63,7 +63,7 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login(LoginViewModel model)
+    public async Task<IActionResult> Login(LoginDto model)
     {
         var user = await _userManager.FindByNameAsync(model.PhoneNumber);
 

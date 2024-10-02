@@ -1,14 +1,12 @@
-﻿using DanceQualifiers.Core.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DanceQualifiers.Core.DTO;
+using DanceQualifiers.Core.Models;
 
 namespace DanceQualifiers.Application.Interfaces
 {
     public interface IDirectionService
     {
-        Task CreateDirectionAsync(CreateDirectionViewModel model);
+        Task CreateDirectionAsync(CreateDirectionDto model);
+        Task<bool> DeleteDirectionAsync(int directionId);
+        Task<IEnumerable<Direction>> GetAllDirectionsAsync();
     }
 }
