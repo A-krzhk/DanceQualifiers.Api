@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DanceQualifiers.Api.Controllers
 {
+   
     [Route("api/[controller]")]
     [ApiController]
     public class DirectionController : ControllerBase

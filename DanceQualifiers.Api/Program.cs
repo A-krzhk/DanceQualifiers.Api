@@ -50,6 +50,7 @@ builder.Services.AddDbContext<DanceQualifiersDbContext>(
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IRoleSeeder, RoleSeeder>();
 builder.Services.AddScoped<IDirectionService, DirectionService>();
+builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<DanceQualifiersDbContext>()
