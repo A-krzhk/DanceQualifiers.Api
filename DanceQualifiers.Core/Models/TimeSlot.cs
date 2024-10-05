@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DanceQualifiers.Core.Models
+﻿namespace DanceQualifiers.Core.Models
 {
     public class TimeSlot
     {
@@ -14,5 +8,6 @@ namespace DanceQualifiers.Core.Models
         public int MaxParticipants { get; set; }
         public int RegisteredParticipants { get; set; }
         public int DirectionId { get; set; }
+        public ICollection<UserEnrollment>? UserEnrollments { get; set; }
     }
 }

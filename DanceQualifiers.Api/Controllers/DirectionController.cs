@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DanceQualifiers.Api.Controllers
 {
+   
     [Route("api/[controller]")]
     [ApiController]
     public class DirectionController : ControllerBase
@@ -29,13 +30,29 @@ namespace DanceQualifiers.Api.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDirection(int id)
+        public async Task<IActionResult> DeleteDirection(int directionId)
         {
-            var result = await _directionService.DeleteDirectionAsync(id);
+            var result = await _directionService.DeleteDirectionAsync(directionId);
             if (!result)
                 return NotFound();
 
-            return Ok($"Direction with the id {id} deleted");
+            return Ok($"Direction with the id {directionId} deleted");
+        }
+
+        [HttpPost("{directionId}")]
+        public async Task<IActionResult> AddTimeSlot(int directionId, CreateTimeSlotDto timeSlotDto)
+        {
+            var timeSlot = await _directionService.AddTimeSlotAsync(directionId, timeSlotDto);
+            if (timeSlot == null) return NotFound();
+            return CreatedAtAction(nameof(AddTimeSlot), new { id = timeSlot.Id }, timeSlot);
+        }
+
+        [HttpDelete("timeSlots/{timeSlotId}")]
+        public async Task<IActionResult> DeleteTimeSlot(int timeSlotId)
+        {
+            var deleted = await _directionService.DeleteTimeSlotAsync(timeSlotId);
+            if (!deleted) return NotFound();
+            return Ok($"Time slot with id {timeSlotId} was deleted");
         }
 
         [HttpGet]
@@ -47,7 +64,7 @@ namespace DanceQualifiers.Api.Controllers
             {
                 return Ok(directions);
             }
-            return NotFound("Отборочные не найдены.");
+            return NotFound("Qualifieres not found");
         }
     }
 }

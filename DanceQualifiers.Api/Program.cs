@@ -1,13 +1,12 @@
 using DanceQualifiers.Application.Interfaces;
 using DanceQualifiers.Application.Services;
 using DanceQualifiers.Core.Models;
+using DanceQualifiers.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Reflection;
 using System.Text;
-using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,6 +50,7 @@ builder.Services.AddDbContext<DanceQualifiersDbContext>(
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IRoleSeeder, RoleSeeder>();
 builder.Services.AddScoped<IDirectionService, DirectionService>();
+builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<DanceQualifiersDbContext>()
@@ -83,6 +83,9 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 
 var app = builder.Build();
+
+var port = Environment.GetEnvironmentVariable("PORT") ?? "7015";
+app.Urls.Add($"https://*:{port}");
 
 using (var scope = app.Services.CreateScope())
 {
