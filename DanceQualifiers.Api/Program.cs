@@ -84,6 +84,9 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 var app = builder.Build();
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "7015";
+app.Urls.Add($"https://*:{port}");
+
 using (var scope = app.Services.CreateScope())
 {
     var roleSeeder = scope.ServiceProvider.GetRequiredService<IRoleSeeder>();
